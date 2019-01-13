@@ -6,12 +6,14 @@ const uri: string = 'mongodb://localhost:27017/tsNodejsDB';
 mongoose.connect(uri, { useNewUrlParser: true });
 
 mongoose.connection.on('connected', () => {
-    console.log('connected');
+    console.log('mongoose defalut connection open to ' + uri);
 });
 mongoose.connection.on('error', (err) => {
-    console.log(err);
+    console.log('mongoose defalut connection error ' + err);
 });
-mongoose.connection.on('disconnected', () => { });
+mongoose.connection.on('disconnected', () => {
+    console.log('mongoose defalut connection disconnected');
+});
 
 export interface IBook extends mongoose.Document {
     title: string;
