@@ -15,11 +15,14 @@ mongoose.connection.on('disconnected', () => {
     console.log('mongoose defalut connection disconnected');
 });
 
+
 export interface IBook extends mongoose.Document {
     title: string;
     author: number;
 };
-
+export const subjectSchema = new mongoose.Schema({
+    subject: String
+});
 export const BookSchema = new mongoose.Schema({
     title: { type: String, required: true },
     author: { type: String, required: true },
@@ -28,15 +31,30 @@ export const BookSchema = new mongoose.Schema({
             class: [
                 {
                     section: [
-                        {
-                            subject: String
-                        }
+                        subjectSchema
                     ]
                 }
             ]
         }
     ]
 });
+// export const BookSchema = new mongoose.Schema({
+//     title: { type: String, required: true },
+//     author: { type: String, required: true },
+//     examSubjects: [
+//         {
+//             class: [
+//                 {
+//                     section: [
+//                         {
+//                              subject: String
+//                          }
+//                     ]
+//                 }
+//             ]
+//         }
+//     ]
+// });
 
 const Book = mongoose.model('Book', BookSchema, 'Book');
 export default Book;
